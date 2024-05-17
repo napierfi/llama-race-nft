@@ -65,6 +65,8 @@ contract LlamaRaceDrop is ERC721, Ownable2Step {
         return keccak256(bytes.concat(keccak256(abi.encode(info.account, info.rank, info.questId))));
     }
 
+    /// @param baseMetadataURI: Base URI for the metadata of the token
+    /// Note: Be careful with the baseMetadataURI, it should be ended with `/`.
     function addNewRoot(bytes32 root, string memory baseMetadataURI) public onlyOwner {
         if (_rootExists(root)) revert MerkleRootAlreadyExists();
         if (bytes(baseMetadataURI).length == 0) revert EmptyURI();
@@ -81,7 +83,7 @@ contract LlamaRaceDrop is ERC721, Ownable2Step {
         return uint256(keccak256(abi.encode(info.account, info.rank, info.questId, root)));
     }
 
-    /// @dev URI: Picture of a `tokenId` with a rank of `rank` will be stored at <baseURI>/<rank>.json
+    /// @dev URI: Picture of a `tokenId` with a rank of `rank` will be stored at <baseURI><rank>.json
     function tokenURI(uint256 tokenId) public view override returns (string memory) {
         _requireOwned(tokenId);
 
