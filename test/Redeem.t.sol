@@ -9,7 +9,7 @@ import {Merkle} from "murky/src/Merkle.sol";
 
 contract Redeem is BaseTest {
     /// @dev How to generate toy data
-    /// 1. `bun run script/tree.example.ts` 
+    /// 1. `bun run script/tree.example.ts`
     /// 2. `bun run script/get-proof.example.ts`
     // LeafInfo[2] memory leaves = [LeafInfo(alice, 1, 2), LeafInfo(0x2222222222222222222222222222222222222222, 10, 2)];
     bytes32[3] tree = [

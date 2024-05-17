@@ -94,7 +94,7 @@ contract LlamaRaceDrop is ERC721, Ownable2Step {
     }
 
     function name() public pure override returns (string memory) {
-        return "LlamaRace Race Drop";
+        return "Llama Race Drop";
     }
 
     function symbol() public pure override returns (string memory) {
