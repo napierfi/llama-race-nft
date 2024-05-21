@@ -80,7 +80,7 @@ contract Redeem is BaseTest {
         inputs[1] = "data/example.txt";
         bytes memory result = vm.ffi(inputs);
         LeafInfo[] memory leaves = abi.decode(result, (LeafInfo[]));
-        require(leaves.length > 1, "Invalid number of leaves"); 
+        require(leaves.length > 1, "Invalid number of leaves");
 
         index = _bound(index, 0, leaves.length - 1);
         testFuzz_Redeem(leaves, index);
