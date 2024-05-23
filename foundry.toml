@@ -11,7 +11,7 @@ evm_version = "cancun"
 libs = ['lib']
 
 bytecode_hash = 'none'
-optimizer_runs = 10_000_000
+optimizer_runs = 1_000
 # extra_output = ['storageLayout']
 
 ffi = true
