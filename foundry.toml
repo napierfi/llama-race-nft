@@ -27,9 +27,6 @@ block_timestamp = 31536000 # 365days
 runs = 1000
 max_test_rejects = 1_000_000
 
-[doc]
-out = 'docs/foundry-docs/'
-
 [profile.deep_fuzz]
 [profile.deep_fuzz.fuzz]
 runs = 10_000
