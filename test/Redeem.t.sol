@@ -43,7 +43,8 @@ contract Redeem is BaseTest {
         assertEq(uri, "https://example.com/1.json", "TokenURI is not correct");
     }
 
-    function testFuzz_Redeem(LeafInfo[] memory leaves, uint256 index) public {
+    function testFuzz_Redeem(address caller, LeafInfo[] memory leaves, uint256 index) public {
+        assumeNotZeroAddress(caller);
         vm.assume(leaves.length > 1);
         /// Prepare Merkle Tree
         Merkle m = new Merkle();
@@ -63,6 +64,8 @@ contract Redeem is BaseTest {
         nft.addNewRoot(_root, "https://example.com/");
         changePrank(alice, alice);
         uint256 tokenId = nft.getTokenId(leaves[index], _root);
+
+        changePrank(caller, caller);
         assertEq(nft.redeem(leaves[index], _proof, _root), tokenId, "Redeem function should return tokenId");
 
         assertEq(nft.ownerOf(tokenId), leaves[index].account, "Owner of the token is not correct");
@@ -83,7 +86,7 @@ contract Redeem is BaseTest {
         require(leaves.length > 1, "Invalid number of leaves");
 
         index = _bound(index, 0, leaves.length - 1);
-        testFuzz_Redeem(leaves, index);
+        testFuzz_Redeem({caller: alice, leaves: leaves, index: index});
     }
 
     function test_RevertIf_ReuseProof() public {

@@ -79,6 +79,7 @@ contract LlamaRaceDrop is ERC721, Ownable2Step {
     }
 
     /// @notice Get unique tokenId for a leaf
+    /// @dev The function doesn't revert if `root` or `info` doesn't exist
     function getTokenId(LeafInfo calldata info, bytes32 root) public pure returns (uint256) {
         return uint256(keccak256(abi.encode(info.account, info.rank, info.questId, root)));
     }
@@ -92,6 +93,7 @@ contract LlamaRaceDrop is ERC721, Ownable2Step {
     }
 
     function getTokenData(uint256 tokenId) public view returns (TokenData memory) {
+        _requireOwned(tokenId);
         return s_tokenData[tokenId];
     }
 

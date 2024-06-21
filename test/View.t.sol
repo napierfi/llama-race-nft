@@ -11,4 +11,9 @@ contract View is BaseTest {
         vm.expectRevert(abi.encodeWithSelector(IERC721Errors.ERC721NonexistentToken.selector, 12121));
         nft.tokenURI(12121);
     }
+
+    function test_TokenData_RevertWhen_NotExists() public {
+        vm.expectRevert(abi.encodeWithSelector(IERC721Errors.ERC721NonexistentToken.selector, 12991));
+        nft.tokenURI(12991);
+    }
 }
